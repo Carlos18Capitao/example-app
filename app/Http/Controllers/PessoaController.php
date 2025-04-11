@@ -2,38 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePessoaRequest;
-use App\Http\Requests\UpdatePessoaRequest;
 use App\Models\Pessoa;
+use Faker\Calculator\Inn;
+use Illuminate\Http\Request;
+use App\Http\Requests\PessoaRequest;
+use App\Services\PessoaService;
+use Inertia\Inertia;
 
 class PessoaController extends Controller
 {
+
+    public function __construct(PessoaService $pessoaService){}
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        $pessoas = $this->pessoaService->getAll();
+        return Inertia::render('Pessoas/Index', [
+            'pessoas' => $pessoas,
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return Inertia::render('Pessoas/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePessoaRequest $request)
+    public function store(Request $request)
     {
         $data = $request->validate([
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:15',
         ]);
 
-        $pessoa = Pessoa::create($data);
+        $pessoa = $this->pessoaService->create($data);
 
-        return response()->json($pessoa, 201);
+        return redirect()->route('pessoas.index')->with('success', 'Pessoa criada com sucesso!');
     }
 
     /**
@@ -41,7 +52,10 @@ class PessoaController extends Controller
      */
     public function show(Pessoa $pessoa)
     {
-        return response()->json($pessoa);
+        $this->pessoaService->getById($pessoa->id);
+        return Inertia::render('Pessoas/Show', [
+            'pessoa' => $pessoa,
+        ]);
     }
 
     /**
@@ -49,22 +63,24 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
-        //
+        return Inertia::render('Pessoas/Edit', [
+            'pessoa' => $pessoa,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePessoaRequest $request, Pessoa $pessoa)
+    public function update(Request $request, Pessoa $pessoa)
     {
         $data = $request->validate([
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:15',
         ]);
 
-        $pessoa->update($data);
+        $updatedPessoa = $this->pessoaService->update($pessoa, $data);
 
-        return response()->json($pessoa);
+        return redirect()->route('pessoas.index')->with('success', 'Pessoa atualizada com sucesso!');
     }
 
     /**
@@ -72,8 +88,8 @@ class PessoaController extends Controller
      */
     public function destroy(Pessoa $pessoa)
     {
-        $pessoa->delete();
+        $this->pessoaService->delete($pessoa);
 
-        return response()->noContent();
+        return redirect()->route('pessoas.index')->with('success', 'Pessoa excluída com sucesso!');
     }
 }
