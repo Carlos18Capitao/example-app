@@ -17,7 +17,12 @@ class CasaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'endereco' => $this->faker->address,
+            'bairro' => $this->faker->word,
+            'cidade' => $this->faker->city,
+            'provincia' => $this->faker->word,
+            'numero' => $this->faker->numberBetween(1, 100),
+            'pessoa_id' => \App\Models\Pessoa::factory(),
         ];
     }
 }

@@ -12,6 +12,8 @@ class CasaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Casa::factory(100)->create([
+            'pessoa_id' => \App\Models\Pessoa::factory(),
+        ]);
     }
 }
