@@ -12,14 +12,14 @@ use Inertia\Inertia;
 class PessoaController extends Controller
 {
 
-    public function __construct(PessoaService $pessoaService){}
+    public function __construct(protected PessoaService $pessoaService){}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $pessoas = $this->pessoaService->getAll();
-        return Inertia::render('Pessoas/Index', [
+        return Inertia::render('Pessoas/index', [
             'pessoas' => $pessoas,
         ]);
     }
@@ -29,7 +29,7 @@ class PessoaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Pessoas/Create');
+        return Inertia::render('Pessoas/create');
     }
 
     /**
@@ -53,7 +53,7 @@ class PessoaController extends Controller
     public function show(Pessoa $pessoa)
     {
         $this->pessoaService->getById($pessoa->id);
-        return Inertia::render('Pessoas/Show', [
+        return Inertia::render('Pessoas/show', [
             'pessoa' => $pessoa,
         ]);
     }
@@ -63,7 +63,7 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
-        return Inertia::render('Pessoas/Edit', [
+        return Inertia::render('Pessoas/edit', [
             'pessoa' => $pessoa,
         ]);
     }

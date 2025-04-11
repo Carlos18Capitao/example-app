@@ -20,6 +20,7 @@ services:
         volumes:
             - '.:/var/www/html'
             - './storage:/var/www/html/storage'
+            - './bootstrap/cache:/var/www/html/bootstrap/cache'
         networks:
             - sail
         depends_on:
