@@ -52,9 +52,9 @@ class PessoaController extends Controller
      */
     public function show(Pessoa $pessoa)
     {
-        $this->pessoaService->getById($pessoa->id);
+        $pessoaFound = $this->pessoaService->getById($pessoa->id);
         return Inertia::render('Pessoas/show', [
-            'pessoa' => $pessoa,
+            'pessoa' => $pessoaFound,
         ]);
     }
 

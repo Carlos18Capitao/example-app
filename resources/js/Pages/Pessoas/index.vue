@@ -15,10 +15,10 @@ defineProps({
     <AppLayout>
         <div class="container-fluid mb-3">
             <Link href="/pessoas/create" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-flag"></i>
-                </span>
-                <span class="text">Nova Pessoa</span>
+            <span class="icon text-white-50">
+                <i class="fas fa-flag"></i>
+            </span>
+            <span class="text">Nova Pessoa</span>
             </Link>
         </div>
         <div class="table-responsive">
@@ -39,11 +39,19 @@ defineProps({
                         <td>{{ pessoa.telefone }}</td>
                         <td>
                             <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary mr-2">
-                                Editar
+                            Editar
                             </Link>
-                            <Link :href="route('pessoas.destroy', pessoa.id)" method="delete" as="button" class="btn btn-danger" type="button">
-                                Deletar
+                            <Link :href="route('pessoas.destroy', pessoa.id)" method="delete" as="button"
+                                class="btn btn-danger" type="button">
+                            Deletar
                             </Link>
+                            <Link :href="route('pessoas.show', pessoa.id)" class="btn btn-warning btn-icon-split ml-2">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                                <span class="text">Ver</span>
+                            </Link>
+                            
                         </td>
                     </tr>
 
