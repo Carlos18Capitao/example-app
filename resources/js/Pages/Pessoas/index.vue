@@ -38,20 +38,17 @@ defineProps({
                         <td>{{ pessoa.nome }}</td>
                         <td>{{ pessoa.telefone }}</td>
                         <td>
-                            <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary mr-2">
-                            Editar
+                            <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary btn-circle mr-2 mr-2">
+                            <i class="fas fa-pen"></i>
                             </Link>
                             <Link :href="route('pessoas.destroy', pessoa.id)" method="delete" as="button"
-                                class="btn btn-danger" type="button">
-                            Deletar
+                                class="btn btn-danger btn-circle" type="button">
+                                <i class="fas fa-trash"></i>
                             </Link>
-                            <Link :href="route('pessoas.show', pessoa.id)" class="btn btn-warning btn-icon-split ml-2">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </span>
-                                <span class="text">Ver</span>
+                            <Link :href="route('pessoas.show', pessoa.id)" class="btn btn-warning btn-circle ml-2">
+                            <i class="fas fa-eye"></i>
                             </Link>
-                            
+
                         </td>
                     </tr>
 
