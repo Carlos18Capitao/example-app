@@ -27,7 +27,7 @@ class PessoaService
     }
     public function getById(int $id): ?Pessoa
     {
-        return Pessoa::findOrFail($id)->with('casas')->first();
+        return Pessoa::findOrFail($id)->with('casas')->withCount('casas')->first();
     }
     public function search(string $query): \Illuminate\Database\Eloquent\Collection
     {

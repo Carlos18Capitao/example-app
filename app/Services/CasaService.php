@@ -24,7 +24,7 @@ class CasaService {
 
     public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
-        return Casa::with('pessoa')->get();
+        return Casa::with('pessoa')->withCount('pessoa')->get();
     }
 
     public function getById(int $id): ?Casa
