@@ -38,8 +38,12 @@ defineProps({
                         <td>{{ pessoa.nome }}</td>
                         <td>{{ pessoa.telefone }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary mr-2">Editar</a>
-                            <a href="#" class="btn btn-danger">Excluir</a>
+                            <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary mr-2">
+                                Editar
+                            </Link>
+                            <Link :href="route('pessoas.destroy', pessoa.id)" method="delete" as="button" class="btn btn-danger" type="button">
+                                Deletar
+                            </Link>
                         </td>
                     </tr>
 
