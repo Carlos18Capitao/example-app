@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCasaRequest;
 use App\Http\Resources\CasaResource;
 use App\Services\CasaService;
 use Inertia\Inertia;
+use App\Models\Pessoa;
+use App\Services\PessoaService;
 
 class CasaController extends Controller
 {
@@ -30,9 +32,12 @@ class CasaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(int $pessoaId)
     {
-        return Inertia::render('Casas/create');
+        $pessoa = new PessoaService();
+        return Inertia::render('Casas/create', [
+            'pessoa' => $pessoa->getById($pessoaId),
+        ]);
     }
 
     /**

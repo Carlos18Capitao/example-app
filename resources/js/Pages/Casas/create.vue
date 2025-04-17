@@ -3,10 +3,21 @@ import { ref } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 
+
+const props = defineProps({
+    pessoa: {
+        type: Object,
+        required: true,
+    },
+});
+
 const form = useForm({
-    nome: '',
-    telefone: '',
-    email: '',
+    endereco: '',
+    bairro: '',
+    cidade: '',
+    provincia: '',
+    numero: '',
+    pessoa: props.pessoa.id,
 });
 
 </script>
@@ -22,26 +33,35 @@ const form = useForm({
 
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Nova Pessoa!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Casa de {{ props.pessoa.nome }}</h1>
                             </div>
-                            <form @submit.prevent="form.post(route('pessoas.store'))" class="user">
+                            <form @submit.prevent="form.post(route('casas.store'))" class="user">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" v-model="form.endereco" id="endereco"
+                                        placeholder="Endereço">
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" v-model="form.nome" id="nomeCompleto"
-                                            placeholder="Nome Completo">
+                                        <input type="text" class="form-control form-control-user" v-model="form.provincia" id="provincia"
+                                            placeholder="Provincia">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" v-model="form.telefone" id="telefone"
-                                            placeholder="Telefone">
+                                        <input type="text" class="form-control form-control-user" v-model="form.cidade" id="cidade"
+                                            placeholder="Cidade">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" v-model="form.email" id="email"
-                                        placeholder="Email">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" v-model="form.bairro" id="bairro"
+                                            placeholder="Bairro">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" v-model="form.numero" id="numero"
+                                            placeholder="Nº de Casa">
+                                    </div>
                                 </div>
-
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    Registar Casa
                                 </button>
                                 <hr>
                             </form>

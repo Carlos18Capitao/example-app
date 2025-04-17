@@ -62,7 +62,7 @@ defineProps({
                             <i class="fas fa-pen"></i>
                             </Link>
 
-                            <Link :href="route('casas.create')" class="btn btn-primary btn-circle mr-2">
+                            <Link :href="route('casas.create.pessoa', pessoa.id)" class="btn btn-primary btn-circle mr-2">
                             <i class="fas fa-home"></i>
                             </Link>
                         </div>

@@ -28,5 +28,5 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('pessoas', PessoaController::class);
 Route::resource('casas', CasaController::class);
-
+Route::get('casas/create/{pessoa}', [CasaController::class, 'create'])->name('casas.create.pessoa');
 require __DIR__.'/auth.php';
