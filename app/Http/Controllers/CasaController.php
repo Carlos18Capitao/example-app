@@ -22,7 +22,7 @@ class CasaController extends Controller
     public function index()
     {
         $casas = $this->casaService->getAll();
-        return Inertia::render('Casas/Index', [
+        return Inertia::render('Casas/index', [
             'casas' => $casas,
         ]);
     }
@@ -32,7 +32,7 @@ class CasaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Casas/Create');
+        return Inertia::render('Casas/create');
     }
 
     /**
