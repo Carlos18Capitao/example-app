@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCasaRequest;
 use App\Http\Requests\UpdateCasaRequest;
 use App\Http\Resources\CasaResource;
 use App\Services\CasaService;
+use Inertia\Inertia;
 
 class CasaController extends Controller
 {
