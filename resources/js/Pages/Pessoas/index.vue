@@ -14,7 +14,7 @@ defineProps({
 <template>
     <AppLayout>
         <div class="container-fluid mb-3">
-            <Link href="/pessoas/create" class="btn btn-primary btn-icon-split">
+            <Link :href="route('pessoas.create')" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-flag"></i>
             </span>
