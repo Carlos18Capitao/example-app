@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/vue3';
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item" :class="{ 'active': route().current('pessoas.index') }">
+            <li class="nav-item" :class="{ 'active': route().current('pessoas.*') }">
                 <Link class="nav-link" :href="route('pessoas.index')" :active="route().current('pessoas.index')"  >
                     <i class="fas fa-fw fa-user"></i>
                     <span>Pessoa</span>
@@ -41,7 +41,7 @@ import { Link } from '@inertiajs/vue3';
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item" :class="{ 'active': route().current('casas.index') }">
+            <li class="nav-item" :class="{ 'active': route().current('casas.*') }">
                 <Link :href="route('casas.index')" class="nav-link" :active="route().current('casas.index')">
                     <i class="fas fa-home"></i>
                     <span>Casas</span>
