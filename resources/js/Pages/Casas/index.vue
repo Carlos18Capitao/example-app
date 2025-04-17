@@ -13,14 +13,7 @@ defineProps({
 
 <template>
     <AppLayout>
-        <div class="container-fluid mb-3">
-            <Link :href="route('casas.create')" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-flag"></i>
-            </span>
-            <span class="text">Nova casa</span>
-            </Link>
-        </div>
+        
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
