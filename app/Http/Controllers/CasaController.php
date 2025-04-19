@@ -56,7 +56,7 @@ class CasaController extends Controller
 
         $casa = $this->casaService->create($data);
 
-        return redirect()->route('casas.index')->with('success', 'Casa criada com sucesso!');
+        return redirect()->route('pessoas.show', $data['pessoa_id'])->with('success', 'Casa criada com sucesso!');
     }
 
     /**
