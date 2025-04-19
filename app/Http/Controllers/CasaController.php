@@ -106,6 +106,6 @@ class CasaController extends Controller
     {
         $id = $casa->pessoa_id;
         $this->casaService->delete($casa);
-        return redirect()->route('casas.show', $id)->with('success', 'Casa excluída com sucesso!');
+        return redirect()->route('pessoas.show', $id)->with('success', 'Casa excluída com sucesso!');
     }
 }

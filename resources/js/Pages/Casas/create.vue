@@ -17,7 +17,7 @@ const form = useForm({
     cidade: '',
     provincia: '',
     numero: '',
-    pessoa: props.pessoa.id,
+    pessoa_id: props.pessoa.id,
 });
 
 </script>
