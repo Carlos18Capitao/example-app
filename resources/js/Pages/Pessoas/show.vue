@@ -62,9 +62,50 @@ defineProps({
                             <i class="fas fa-pen"></i>
                             </Link>
 
-                            <Link :href="route('casas.create.pessoa', pessoa.id)" class="btn btn-primary btn-circle mr-2">
+                            <Link :href="route('casas.create.pessoa', pessoa.id)"
+                                class="btn btn-primary btn-circle mr-2">
                             <i class="fas fa-home"></i>
                             </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mx-auto">
+                <div class="card shadow mb-4" v-for="casa in pessoa.casas" :key="casa.id">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">{{ casa.endereco }}</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink" style="">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <Link :href="route('casas.edit', casa.id)" class="dropdown-item mr-2">
+                                Editar
+                                </Link>
+                                <Link :href="route('casas.destroy', casa.id)" method="delete" as="button"
+                                    class="dropdown-item" type="button">
+                                Deletar
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Direct
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Social
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-info"></i> Referral
+                            </span>
                         </div>
                     </div>
                 </div>
