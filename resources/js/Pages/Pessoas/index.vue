@@ -34,7 +34,7 @@ defineProps({
                 </thead>
 
                 <tbody>
-                    <tr v-for="pessoa in pessoas" :key="pessoa.id">
+                    <tr v-for="pessoa in pessoas" :key="pessoa.id" :class="!pessoa.casas.length?'table-warning animate__animated animate__bounce animate__infinite':''">
                         <td>{{ pessoa.nome }}</td>
                         <td>{{ pessoa.telefone }}</td>
                         <td>
