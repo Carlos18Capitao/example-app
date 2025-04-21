@@ -28,27 +28,25 @@ defineProps({
 
                         <th>Nome</th>
                         <th>telefone</th>
-
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr v-for="pessoa in pessoas" :key="pessoa.id" :class="!pessoa.casas.length?'table-warning animate__animated animate__bounce animate__infinite':''">
+                    <tr v-for="pessoa in pessoas" :key="pessoa.id" :class="!pessoa.casas.length?'table-warning animate__animated animate__pulse animate__infinite':''">
                         <td>{{ pessoa.nome }}</td>
                         <td>{{ pessoa.telefone }}</td>
-                        <td>
-                            <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary btn-circle mr-2 mr-2">
+                        <td >
+                            <Link :href="route('pessoas.edit', pessoa.id)" class="btn btn-primary btn-circle mr-2">
                             <i class="fas fa-pen"></i>
                             </Link>
                             <Link :href="route('pessoas.destroy', pessoa.id)" method="delete" as="button"
                                 class="btn btn-danger btn-circle" type="button">
                                 <i class="fas fa-trash"></i>
                             </Link>
-                            <Link :href="route('pessoas.show', pessoa.id)" class="btn btn-warning btn-circle ml-2">
-                            <i class="fas fa-eye"></i>
+                            <Link :href="route('pessoas.show', pessoa.id)" class="btn btn-warning btn-circle m-2">
+                                <i class="fas fa-eye"></i>
                             </Link>
-
                         </td>
                     </tr>
 
