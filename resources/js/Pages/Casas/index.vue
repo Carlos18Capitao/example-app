@@ -13,7 +13,7 @@ defineProps({
 
 <template>
     <AppLayout>
-        
+
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -31,7 +31,7 @@ defineProps({
                         <td>{{ casa.endereco }}</td>
                         <td>{{ casa.pessoa.nome }}</td>
                         <td>
-                            <Link :href="route('casas.edit', casa.id)" class="btn btn-primary btn-circle mr-2 mr-2">
+                            <Link :href="route('casas.edit', casa.id)" class="btn btn-primary btn-circle mr-2">
                             <i class="fas fa-pen"></i>
                             </Link>
                             <Link :href="route('casas.destroy', casa.id)" method="delete" as="button"
