@@ -22,4 +22,8 @@ class Casa extends Model
     {
         return $this->belongsTo(Pessoa::class);
     }
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
+    }
 }

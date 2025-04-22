@@ -17,4 +17,8 @@ class Pessoa extends Model
     {
         return $this->hasMany(Casa::class);
     }
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
+    }
 }
