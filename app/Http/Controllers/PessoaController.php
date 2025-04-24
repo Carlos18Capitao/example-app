@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PessoaRequest;
 use App\Services\PessoaService;
 use Inertia\Inertia;
+use App\Services\PhotoService;
 
 class PessoaController extends Controller
 {
 
-    public function __construct(protected PessoaService $pessoaService){}
+    public function __construct(
+        protected PessoaService $pessoaService,
+        protected PhotoService $photoService
+    ){}
     /**
      * Display a listing of the resource.
      */
@@ -40,11 +44,18 @@ class PessoaController extends Controller
         $data = $request->validate([
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:15',
+            'email' => 'nullable|email|max:255',
+            'url' => 'nullable|image|max:2048', // Máximo 2MB
         ]);
 
         $pessoa = $this->pessoaService->create($data);
 
-        return redirect()->route('pessoas.index')->with('success', 'Pessoa criada com sucesso!');
+        if ($request->hasFile('url')) {
+            $this->photoService->upload($request->file('url'), $pessoa);
+        }
+
+        return redirect()->route('pessoas.index')
+            ->with('success', 'Pessoa criada com sucesso!');
     }
 
     /**
@@ -76,11 +87,18 @@ class PessoaController extends Controller
         $data = $request->validate([
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:15',
+            'email' => 'nullable|email|max:255',
+            'url' => 'nullable|image|max:2048', // Máximo 2MB
         ]);
 
         $updatedPessoa = $this->pessoaService->update($pessoa, $data);
 
-        return redirect()->route('pessoas.index')->with('success', 'Pessoa atualizada com sucesso!');
+        if ($request->hasFile('url')) {
+            $this->photoService->upload($request->file('url'), $updatedPessoa);
+        }
+
+        return redirect()->route('pessoas.index')
+            ->with('success', 'Pessoa atualizada com sucesso!');
     }
 
     /**
@@ -89,7 +107,7 @@ class PessoaController extends Controller
     public function destroy(Pessoa $pessoa)
     {
         $this->pessoaService->delete($pessoa);
-
-        return redirect()->route('pessoas.index')->with('success', 'Pessoa excluída com sucesso!');
+        return redirect()->route('pessoas.index')
+            ->with('success', 'Pessoa excluída com sucesso!');
     }
 }
