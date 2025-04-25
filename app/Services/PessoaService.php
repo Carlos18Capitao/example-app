@@ -1,9 +1,14 @@
 <?php
 namespace App\Services;
 use App\Models\Pessoa;
+use App\Services\PhotoService;
 
 class PessoaService
 {
+    public function __construct(
+        protected PhotoService $photoService
+    ){}
+
     public function create(array $data): Pessoa
     {
         return Pessoa::create($data);
@@ -17,6 +22,11 @@ class PessoaService
 
     public function delete(Pessoa $pessoa): void
     {
+        // Deletar todas as fotos associadas à pessoa usando o PhotoService
+        foreach ($pessoa->photos as $photo) {
+            $this->photoService->delete($photo);
+        }
+        
         $pessoa->delete();
         return;
     }
