@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 
+const imagePreview = ref(null);
+
 const form = useForm({
     nome: '',
     telefone: '',
@@ -11,7 +13,18 @@ const form = useForm({
 });
 
 const handleFileChange = (event) => {
-    form.url = event.target.files[0];
+    const file = event.target.files[0];
+    form.url = file;
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.value = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        imagePreview.value = null;
+    }
 };
 
 </script>
@@ -32,14 +45,29 @@ const handleFileChange = (event) => {
                             })" class="user">
                                 <div class="form-group">
                                     <input 
-                                        type="file" 
-                                        class="form-control form-control-user" 
-                                        id="url"
-                                        @change="handleFileChange"
-                                        accept="image/*"
+                                    type="file" 
+                                    name="url"
+                                    class="form-control form-control-user" 
+                                    id="url"
+                                    style="display: none;"
+                                    @change="handleFileChange"
+                                    accept="image/*"
                                     >
                                     <div v-if="form.errors.url" class="text-danger mt-1">
                                         {{ form.errors.url }}
+                                    </div>
+                                    <div v-if="imagePreview" class="mt-3 text-center">
+                                        <label for="url" style="cursor: pointer;">
+                                            <img :src="imagePreview" 
+                                            class="img-profile rounded-circle" 
+                                            style="width: 100px; height: 100px; object-fit: cover;"
+                                            >
+                                        </label>
+                                    </div>
+                                    <div class="mt-3 text-center" v-else >
+                                        <label for="url" style="cursor: pointer;">
+                                            <img style="width: 100px; height: 100px; object-fit: cover;" class="img-profile rounded-circle" src="/startbootstrap/img/undraw_profile.svg">
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
