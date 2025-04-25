@@ -23,18 +23,21 @@ class PessoaService
 
     public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
-        return Pessoa::with('casas')->get();
+        return Pessoa::with(['casas', 'photos'])->get();
     }
+
     public function getById(int $id): ?Pessoa
     {
-        return Pessoa::with('casas')
+        return Pessoa::with(['casas', 'photos'])
             ->withCount('casas')
             ->findOrFail($id);
     }
+
     public function search(string $query): \Illuminate\Database\Eloquent\Collection
     {
         return Pessoa::where('nome', 'like', "%{$query}%")
             ->orWhere('telefone', 'like', "%{$query}%")
+            ->with('photos')
             ->get();
     }
 }
