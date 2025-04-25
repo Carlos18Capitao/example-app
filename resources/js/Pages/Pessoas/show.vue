@@ -43,7 +43,13 @@ defineProps({
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-2">
-                                <img class="img-profile rounded-circle" src="/startbootstrap/img/undraw_profile.svg">
+                                <img 
+                                    v-if="pessoa.photos && pessoa.photos.length > 0" 
+                                    class="img-profile rounded-circle" 
+                                    :src="pessoa.photos[0].url"
+                                    style="width: 100px; height: 100px; object-fit: cover;"
+                                    >
+                                <img v-else class="img-profile rounded-circle" src="/startbootstrap/img/undraw_profile.svg">
                             </div>
                             <div class="col-lg-10 my-auto">
                                 <h6 class="m-0 font-weight-bold text-primary">{{ pessoa.nome }}</h6>
