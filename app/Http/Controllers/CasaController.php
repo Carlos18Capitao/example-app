@@ -21,9 +21,13 @@ class CasaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $casas = $this->casaService->getAll();
+        $casas = $this->casaService->
+        paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 6),
+            filter: $request->filter,);
         return Inertia::render('Casas/index', [
             'casas' => $casas,
         ]);
@@ -34,7 +38,7 @@ class CasaController extends Controller
      */
     public function create(int $pessoaId)
     {
-        $pessoa = new PessoaService();
+        $pessoa = new PessoaService;
         return Inertia::render('Casas/create', [
             'pessoa' => $pessoa->getById($pessoaId),
         ]);

@@ -20,11 +20,17 @@ class PessoaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pessoas = $this->pessoaService->getAll();
+        $pessoas = $this->pessoaService->
+        paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 10),
+            filter: $request->filter,);
+
+        #dd($pessoas->items());
         return Inertia::render('Pessoas/index', [
-            'pessoas' => $pessoas,
+            'pessoas' => $pessoas->items(),
         ]);
     }
 
