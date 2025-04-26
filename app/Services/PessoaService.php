@@ -8,8 +8,8 @@ use App\Services\PaginationPresenter;
 
 class PessoaService
 {
+    public PhotoService $photoService;
     public function __construct(
-        protected PhotoService $photoService
     ) {}
 
     public function create(array $data): Pessoa
@@ -25,6 +25,7 @@ class PessoaService
 
     public function delete(Pessoa $pessoa): void
     {
+        $this->photoService = new PhotoService;
         // Deletar todas as fotos associadas à pessoa usando o PhotoService
         foreach ($pessoa->photos as $photo) {
             $this->photoService->delete($photo);

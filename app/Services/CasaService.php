@@ -2,9 +2,16 @@
 
 namespace App\Services;
 use App\Models\Casa;
+use App\Services\PhotoService;
+use App\Services\PaginationPresenter;
 
 
 class CasaService {
+
+    public function __construct(
+        protected PhotoService $photoService
+    ) {}
+
     public function create(array $data): Casa
     {
         return Casa::create($data);
@@ -18,6 +25,9 @@ class CasaService {
 
     public function delete(Casa $casa): void
     {
+        foreach ($casa->photos as $photo) {
+            $this->photoService->delete($photo);
+        }
         $casa->delete();
         return;
     }
@@ -31,6 +41,20 @@ class CasaService {
     {
         return Casa::findOrFail($id)->with('pessoa')->first();
     }
+
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null)
+    {
+        $result = Casa::with('pessoa','photos')
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('endereco', 'like', "%{$filter}%");
+                }
+            })
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+#dd($result);
+        return new PaginationPresenter($result);
+    }
+
     public function search(string $query): \Illuminate\Database\Eloquent\Collection
     {
         return Casa::where('endereco', 'like', "%{$query}%")

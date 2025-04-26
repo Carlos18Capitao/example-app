@@ -11,10 +11,14 @@ use App\Services\CasaService;
 use Inertia\Inertia;
 use App\Models\Pessoa;
 use App\Services\PessoaService;
+use App\Services\PhotoService;
 
 class CasaController extends Controller
 {
-    public function __construct(private CasaService $casaService)
+    public function __construct(
+        private CasaService $casaService,
+        private PhotoService $photoService
+    )
     {
         $this->casaService = $casaService;
     }
@@ -38,7 +42,8 @@ class CasaController extends Controller
      */
     public function create(int $pessoaId)
     {
-        $pessoa = new PessoaService;
+        $pessoa = new PessoaService();
+        #dd($pessoaId, $pessoa->getById($pessoaId));
         return Inertia::render('Casas/create', [
             'pessoa' => $pessoa->getById($pessoaId),
         ]);
