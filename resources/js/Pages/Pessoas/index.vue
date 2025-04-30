@@ -35,19 +35,21 @@ defineProps({
                     <tr v-for="pessoa in pessoas" :key="pessoa.id" :class="!pessoa.casas.length?'table-warning animate__animated animate__pulse animate__infinite':''">
                         <td>
                             <div class="d-flex align-items-center">
-                                <img 
+                                <img
                                     v-if="pessoa.photos && pessoa.photos.length > 0"
                                     :src="pessoa.photos[0].url"
                                     :alt="pessoa.nome"
                                     class="img-profile rounded-circle mr-2"
                                     style="width: 32px; height: 32px; object-fit: cover;"
+                                    loading="lazy"
                                 >
-                                <img 
+                                <img
                                     v-else
                                     src="/startbootstrap/img/undraw_profile.svg"
                                     :alt="pessoa.nome"
                                     class="img-profile rounded-circle mr-2"
                                     style="width: 32px; height: 32px; object-fit: cover;"
+                                    loading="lazy"
                                 >
                                 {{ pessoa.nome }}
                             </div>

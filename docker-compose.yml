@@ -21,7 +21,6 @@ services:
             - '.:/var/www/html'
             - './storage:/var/www/html/storage'
             - './bootstrap/cache:/var/www/html/bootstrap/cache'
-            - vscode-server:/root/.vscode-server
         networks:
             - sail
         depends_on:

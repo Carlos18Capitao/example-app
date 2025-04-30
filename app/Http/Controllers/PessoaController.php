@@ -57,7 +57,8 @@ class PessoaController extends Controller
         $pessoa = $this->pessoaService->create($data);
 
         if ($request->hasFile('url')) {
-            $this->photoService->upload($request->file('url'), $pessoa);
+            #$this->photoService->upload($request->file('url'), $pessoa);
+            $this->photoService->update($pessoa->photo, $request->file('url'));
         }
 
         return redirect()->route('pessoas.index')
@@ -80,6 +81,7 @@ class PessoaController extends Controller
      */
     public function edit(Pessoa $pessoa)
     {
+        $pessoa = $this->pessoaService->getById($pessoa->id);
         return Inertia::render('Pessoas/edit', [
             'pessoa' => $pessoa,
         ]);
