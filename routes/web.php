@@ -7,14 +7,13 @@ use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\CasaController;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [PessoaController::class, 'index'])->name('home');
+/* return Inertia::render('Welcome', [
+    'canLogin' => Route::has('login'),
+    'canRegister' => Route::has('register'),
+    'laravelVersion' => Application::VERSION,
+    'phpVersion' => PHP_VERSION,
+]); */
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
