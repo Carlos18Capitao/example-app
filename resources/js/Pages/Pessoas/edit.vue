@@ -14,7 +14,7 @@ const props = defineProps({
 const form = useForm({
     nome: props.pessoa.nome,
     telefone: props.pessoa.telefone,
-    // url: null,
+    // url: null
     //email: props.pessoa.email,
     // url: props.pessoa.photos && props.pessoa.photos.length > 0 ? props.pessoa.photos[0].url : null, // for image file
 });
@@ -41,11 +41,11 @@ function submit() {
     }
 
     form.put(route('pessoas.update', props.pessoa.id), {
-        //forceFormData: true,
+        forceFormData: true,
         onSuccess: () => alert('Pessoa atualizada com sucesso!'),
         onError: (errors) => {
             // alert('Erro ao atualizar pessoa. Verifique os dados e tente novamente.');
-        }
+        },
     });
 }
 </script>
