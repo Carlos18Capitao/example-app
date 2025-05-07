@@ -14,8 +14,9 @@ const props = defineProps({
 const form = useForm({
     nome: props.pessoa.nome,
     telefone: props.pessoa.telefone,
-    email: props.pessoa.email,
-    url: props.pessoa.photos && props.pessoa.photos.length > 0 ? props.pessoa.photos[0].url : null, // for image file
+    // url: null,
+    //email: props.pessoa.email,
+    // url: props.pessoa.photos && props.pessoa.photos.length > 0 ? props.pessoa.photos[0].url : null, // for image file
 });
 
 const imagePreview = ref(props.pessoa.photos && props.pessoa.photos.length > 0 ? props.pessoa.photos[0].url : null);
@@ -38,12 +39,12 @@ function submit() {
     if (!(form.url instanceof File)) {
         delete form.url;
     }
-    form.patch(route('pessoas.update', props.pessoa), {
-        forceFormData: true,
+
+    form.put(route('pessoas.update', props.pessoa.id), {
+        //forceFormData: true,
         onSuccess: () => alert('Pessoa atualizada com sucesso!'),
         onError: (errors) => {
-            console.error(errors);
-            alert('Erro ao atualizar pessoa. Verifique os dados e tente novamente.');
+            // alert('Erro ao atualizar pessoa. Verifique os dados e tente novamente.');
         }
     });
 }
@@ -61,7 +62,7 @@ function submit() {
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Editar Pessoa!</h1>
                             </div>
-                            <form @submit.prevent="submit" class="user" >
+                            <form @submit.prevent="submit" class="user">
 
                                 <div class="form-group">
                                     <input type="file" name="url" id="url" class="form-control form-control-user"
@@ -82,22 +83,31 @@ function submit() {
                                                 src="/startbootstrap/img/undraw_profile.svg">
                                         </label>
                                     </div>
+                                    <div v-if="form.errors.url" class="text-danger mt-1">
+                                        {{ form.errors.url }}
+                                    </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" v-model="form.nome"
                                             placeholder="Nome Completo">
+                                        <div v-if="form.errors.nome" class="text-danger mt-1">
+                                            {{ form.errors.nome }}
+                                        </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
                                             v-model="form.telefone" placeholder="Telefone">
+                                        <div v-if="form.errors.telefone" class="text-danger mt-1">
+                                            {{ form.errors.telefone }}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input type="email" class="form-control form-control-user" v-model="form.email"
                                         placeholder="Email">
-                                </div>
+                                </div> -->
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Atualizar Pessoa
                                 </button>

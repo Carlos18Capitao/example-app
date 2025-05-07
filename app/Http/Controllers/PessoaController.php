@@ -57,8 +57,8 @@ class PessoaController extends Controller
         $pessoa = $this->pessoaService->create($data);
 
         if ($request->hasFile('url')) {
-            #$this->photoService->upload($request->file('url'), $pessoa);
-            $this->photoService->update($pessoa->photo, $request->file('url'));
+            $this->photoService->upload($request->file('url'), $pessoa);
+            #$this->photoService->upload($pessoa->photo, $request->file('url'));
         }
 
         return redirect()->route('pessoas.index')
@@ -102,7 +102,7 @@ class PessoaController extends Controller
         $updatedPessoa = $this->pessoaService->update($pessoa, $data);
 
         if ($request->hasFile('url')) {
-            $this->photoService->upload($request->file('url'), $updatedPessoa);
+            $this->photoService->update($data['url'], $updatedPessoa->toArray());
         }
 
         return redirect()->route('pessoas.index')
