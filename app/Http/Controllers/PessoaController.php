@@ -102,8 +102,11 @@ class PessoaController extends Controller
 
         $updatedPessoa = $this->pessoaService->update($pessoa, $data);
 
+
         if ($request->hasFile('url')) {
-            $this->photoService->update($pessoa->photos->first(), $data);
+            if($updatedPessoa->photos->isEmpty()){
+                $this->photoService->upload($request->file('url'), $pessoa);
+            }
         }
 
         return redirect()->route('pessoas.index')
