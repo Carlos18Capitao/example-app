@@ -12,17 +12,8 @@ class PhotoService
 {
     public function upload(UploadedFile|array $data, ?Model $model = null): Photo
     {
-        if ($data instanceof UploadedFile) {
-            $file = $data;
-            $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('photos', $filename, 'public');
-            
-            $data = [
-                'url' => $path,
-                'imageable_id' => $model?->id,
-                'imageable_type' => $model ? get_class($model) : null
-            ];
-        } else {
+        $file = $data;
+        if (!($data instanceof UploadedFile)) {
             if (isset($data['url']) && $data['url'] instanceof UploadedFile) {
                 $file = $data['url'];
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -30,7 +21,15 @@ class PhotoService
                 $data['url'] = $path;
             }
         }
-        
+
+        $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('photos', $filename, 'public');
+        $data = [
+            'url' => $path,
+            'imageable_id' => $model?->id,
+            'imageable_type' => $model ? get_class($model) : null,
+        ];
+
         return Photo::create($data);
     }
 
@@ -41,13 +40,13 @@ class PhotoService
             if ($photo->url) {
                 Storage::disk('public')->delete($photo->getRawOriginal('url'));
             }
-            
+
             $file = $data['url'];
             $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('photos', $filename, 'public');
             $data['url'] = $path;
         }
-        
+
         $photo->update($data);
         return $photo;
     }
@@ -62,8 +61,6 @@ class PhotoService
 
     public function getAllFromModel(Model $model)
     {
-        return Photo::where('imageable_id', $model->id)
-            ->where('imageable_type', get_class($model))
-            ->get();
+        return Photo::where('imageable_id', $model->id)->where('imageable_type', get_class($model))->get();
     }
 }

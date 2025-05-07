@@ -92,6 +92,7 @@ class PessoaController extends Controller
      */
     public function update(Request $request, Pessoa $pessoa)
     {
+
         $data = $request->validate([
             'nome' => 'required|string|max:255',
             'telefone' => 'required|string|max:15',
@@ -102,7 +103,7 @@ class PessoaController extends Controller
         $updatedPessoa = $this->pessoaService->update($pessoa, $data);
 
         if ($request->hasFile('url')) {
-            $this->photoService->update($data['url'], $updatedPessoa->toArray());
+            $this->photoService->update($pessoa->photos->first(), $data);
         }
 
         return redirect()->route('pessoas.index')
