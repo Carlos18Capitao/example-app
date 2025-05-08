@@ -22,12 +22,13 @@ class CasaController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $data = $request->validate([
-            'endereco' => 'required|string|max:100',
-            'bairro' => 'required|string|max:50',
-            'cidade' => 'required|string|max:50',
-            'provincia' => 'required|string|max:50',
-            'numero' => 'required|string|max:10',
+            'endereco' => 'required|string',
+            'sala' => 'required|integer',
+            'quarto' => 'required|integer',
+            'casaBanho' => 'required|integer',
+            'cozinha' => 'required|integer',
             'pessoa_id' => 'required|exists:pessoas,id',
         ]);
 
@@ -57,10 +58,10 @@ class CasaController extends Controller
 
         $data = $request->validate([
             'endereco' => 'required|string|max:100',
-            'bairro' => 'required|string|max:50',
-            'cidade' => 'required|string|max:50',
-            'provincia' => 'required|string|max:50',
-            'numero' => 'required|string|max:10',
+            'sala' => 'required|integer',
+            'quarto' => 'required|integer',
+            'casaBanho' => 'required|integer',
+            'cozinha' => 'required|integer',
             'pessoa_id' => 'required|exists:pessoas,id',
         ]);
 

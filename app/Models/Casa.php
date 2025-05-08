@@ -11,10 +11,10 @@ class Casa extends Model
     use HasFactory;
     protected $fillable = [
         'endereco',
-        'bairro',
-        'cidade',
-        'provincia',
-        'numero',
+        'sala',
+        'quarto',
+        'casaDeBanho',
+        'cozinha',
         'pessoa_id',
     ];
 
