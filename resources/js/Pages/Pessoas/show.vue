@@ -14,22 +14,22 @@ defineProps({
 
 function handleFileChange(event, casaId) {
     console.log('handleFileChange', event, casaId);
-  const files = event.target.files;
+    const files = event.target.files;
 
-  if (!files.length) return;
+    if (!files.length) return;
 
-  const formData = new FormData();
-  for (let i = 0; i < files.length; i++) {
-    formData.append('url[]', files[i]);
-  }
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append('url[]', files[i]);
+    }
 
-  router.post(route('casas.photos.store', casaId), formData, {
-    forceFormData: true,
-    preserveScroll: true,
-    onSuccess: () => {
-      console.log('Fotos enviadas!');
-    },
-  });
+    router.post(route('casas.photos.store', casaId), formData, {
+        forceFormData: true,
+        preserveScroll: true,
+        onSuccess: () => {
+            console.log('Fotos enviadas!');
+        },
+    });
 }
 
 </script>
@@ -120,29 +120,14 @@ function handleFileChange(event, casaId) {
                     <!-- Card Body -->
                     <div class="card-body">
 
-                        <label :for="'fotocasa-'+casa.id" class="custom-file-upload mt-1" style="cursor: pointer;">
+                        <label :for="'fotocasa-' + casa.id" class="custom-file-upload mt-1" style="cursor: pointer;">
                             <i class="fas fa-camera fa-sm fa-fw text-gray-800"></i>
                         </label>
 
-                        <input type="file" name="fotocasa" multiple="multiple" accept="image/*" @change="(e) => handleFileChange(e, casa.id)" class="d-none" :id="'fotocasa-'+casa.id">
+                        <input type="file" name="fotocasa" multiple="multiple" accept="image/*"
+                            @change="(e) => handleFileChange(e, casa.id)" class="d-none" :id="'fotocasa-' + casa.id">
 
-                        <div v-if="casa.photos && casa.photos.length > 0" id="carouselExampleInterval" class="carousel slide h-1" data-bs-ride="carousel">
-                            <div v-for="(photo, index) in casa.photos" :key="photo.id" class="carousel-inner">
-                                <div :class="{active: index === 0}" class="carousel-item mw-100" style="height: 100px;"  data-bs-interval="1000">
-                                    <img :src="photo.url" :alt="casa.endereco"  class="d-block mx-auto">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
+
 
                         <div class="row">
 
@@ -167,6 +152,35 @@ function handleFileChange(event, casaId) {
                                 <span class="mr-2">
                                     <i class="fas fa-circle text-info"></i> Referral
                                 </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" v-if="pessoa.photos && pessoa.photos.length > 0">
+                        <div class="row">
+                            <div class="col-lg-12 my-auto">
+                                <div class="d-flex justify-content-center">
+                                    <p class="d-inline-flex gap-1">
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseExample" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            <i class="fas fa-camera"></i>
+                                            <span class="ml-2">Ver fotos</span>
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">
+                                            <div class="row">
+                                                <div class="col-lg-12 my-auto">
+                                                    <div class="d-flex justify-content-center">
+                                                        <img v-for="photo in casa.photos" :key="photo.id"
+                                                            :src="photo.url" class="img-thumbnail m-1"
+                                                            style="width: 100px; height: 100px; object-fit: cover;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
