@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('pessoas', PessoaController::class);
 Route::resource('casas', CasaController::class);
 Route::post('/casas/{casa}/photos', [CasaPhotoController::class, 'store'])->name('casas.photos.store');
+Route::delete('photos/{photo}', [CasaPhotoController::class, 'destroy'])->name('casas.photos.destroy');
 
 
 Route::get('casas/create/{pessoa}', [CasaController::class, 'create'])->name('casas.create.pessoa');

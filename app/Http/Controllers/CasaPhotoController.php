@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use App\Models\Casa;
 use App\Services\PhotoService;
@@ -72,8 +73,12 @@ class CasaPhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Photo $photo)
     {
-        //
+        $id = $photo->id;
+        #$photo = $this->photoService->getById($id);
+        $this->photoService->delete($photo);
+
+        #return response()->json(['message' => 'Foto removida com sucesso.']);
     }
 }
