@@ -155,18 +155,20 @@ function handleFileChange(event, casaId) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer row" v-if="casa.photos && casa.photos.length > 0">
-                        <div v-for="photo in casa.photos" :key="photo.id"
-                            class="position-relative m-1 image-wrapper col-lg-4" style="width: 100px; height: 100px;">
-                            <!-- Badge visível apenas no hover -->
-                            <Link :href="route('casas.photos.destroy', photo.id)" method="delete" as="button"
-                                class="badge bg-danger position-absolute top-1 end-0 p-1 delete-badge" type="button">
-                            <i class="fas fa-trash text-white"></i>
-                            </Link>
+                    <div class="card-footer" v-if="casa.photos && casa.photos.length > 0">
+                        <div class="row">
+                            <div v-for="photo in casa.photos" :key="photo.id"
+                                class="position-relative m-1 image-wrapper col-lg-4" style="width: 100px; height: 100px;">
+                                <!-- Badge visível apenas no hover -->
+                                <Link :href="route('casas.photos.destroy', photo.id)" method="delete" as="button"
+                                    class="badge bg-danger position-absolute top-1 end-0 p-1 delete-badge" type="button">
+                                <i class="fas fa-trash text-white"></i>
+                                </Link>
 
-                            <!-- Imagem -->
-                            <img :src="photo.url" class="img-thumbnail"
-                                style="width: 100%; height: 100%; object-fit: cover;" />
+                                <!-- Imagem -->
+                                <img :src="photo.url" class="img-thumbnail"
+                                    style="width: 100%; height: 100%; object-fit: cover;" />
+                            </div>
                         </div>
                     </div>
                 </div>
