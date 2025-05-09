@@ -155,19 +155,17 @@ function handleFileChange(event, casaId) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer" v-if="pessoa.photos && pessoa.photos.length > 0">
+                    <div class="card-footer" v-if="casa.photos && casa.photos.length > 0">
                         <div class="row">
                             <div class="col-lg-12 my-auto">
+                                <button class="btn my-2" type="button" data-bs-toggle="collapse"
+                                    :data-bs-target="'#collapseExample' + casa.id" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    <i class="fas fa-image"></i>
+                                    <span class="ml-2">Ver fotos</span>
+                                </button>
                                 <div class="d-flex justify-content-center">
-                                    <p class="d-inline-flex gap-1">
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseExample" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            <i class="fas fa-camera"></i>
-                                            <span class="ml-2">Ver fotos</span>
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="collapseExample">
+                                    <div class="collapse" :id="'collapseExample' + casa.id">
                                         <div class="card card-body">
                                             <div class="row">
                                                 <div class="col-lg-12 my-auto">
