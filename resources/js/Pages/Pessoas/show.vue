@@ -13,6 +13,7 @@ defineProps({
 });
 
 function handleFileChange(event, casaId) {
+    console.log('handleFileChange', event, casaId);
   const files = event.target.files;
 
   if (!files.length) return;
@@ -119,11 +120,11 @@ function handleFileChange(event, casaId) {
                     <!-- Card Body -->
                     <div class="card-body">
 
-                        <label for="fotocasa" class="custom-file-upload mt-1" style="cursor: pointer;">
+                        <label :for="'fotocasa-'+casa.id" class="custom-file-upload mt-1" style="cursor: pointer;">
                             <i class="fas fa-camera fa-sm fa-fw text-gray-800"></i>
                         </label>
 
-                        <input type="file" name="fotocasa" multiple="multiple" accept="image/*" @change="(e) => handleFileChange(e, casa.id)" class="d-none" id="fotocasa">
+                        <input type="file" name="fotocasa" multiple="multiple" accept="image/*" @change="(e) => handleFileChange(e, casa.id)" class="d-none" :id="'fotocasa-'+casa.id">
 
                         <div v-if="casa.photos && casa.photos.length > 0" id="carouselExampleInterval" class="carousel slide h-1" data-bs-ride="carousel">
                             <div v-for="(photo, index) in casa.photos" :key="photo.id" class="carousel-inner">
