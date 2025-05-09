@@ -155,31 +155,22 @@ function handleFileChange(event, casaId) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer" v-if="casa.photos && casa.photos.length > 0">
-                        <div class="row">
-                            <div class="col-lg-12 my-auto">
-                                <button class="btn my-2" type="button" data-bs-toggle="collapse"
-                                    :data-bs-target="'#collapseExample' + casa.id" aria-expanded="false"
-                                    aria-controls="collapseExample">
-                                    <i class="fas fa-image"></i>
-                                    <span class="ml-2">Ver fotos</span>
-                                </button>
-                                <div class="d-flex justify-content-center">
-                                    <div class="collapse" :id="'collapseExample' + casa.id">
-                                        <div class="card card-body">
-                                            <div class="row">
-                                                <div class="col-lg-12 my-auto">
-                                                    <div class="d-flex justify-content-center">
-                                                        <img v-for="photo in casa.photos" :key="photo.id"
-                                                            :src="photo.url" class="img-thumbnail m-1"
-                                                            style="width: 100px; height: 100px; object-fit: cover;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="card-footer row" v-if="casa.photos && casa.photos.length > 0">
+
+
+                        <div v-for="photo in casa.photos" :key="photo.id"
+                            class="position-relative m-1 image-wrapper col-lg-4" style="width: 100px; height: 100px;">
+                            <!-- Badge visível apenas no hover -->
+                            <span class="badge bg-danger position-absolute top-1 end-0 p-1 delete-badge"
+                                title="Apagar foto">
+                                <i class="fas fa-trash-alt text-white"></i>
+                            </span>
+
+                            <!-- Imagem -->
+                            <img :src="photo.url" class="img-thumbnail"
+                                style="width: 100%; height: 100%; object-fit: cover;" />
+
+
                         </div>
                     </div>
                 </div>
@@ -187,3 +178,20 @@ function handleFileChange(event, casaId) {
         </div>
     </AppLayout>
 </template>
+
+<style scoped>
+.image-wrapper .delete-badge {
+    display: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.image-wrapper:hover .delete-badge {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.image-wrapper:hover img {
+    opacity: 0.6;
+}
+</style>
