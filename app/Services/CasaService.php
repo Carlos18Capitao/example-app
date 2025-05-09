@@ -34,17 +34,17 @@ class CasaService {
 
     public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
-        return Casa::with('pessoa')->withCount('pessoa')->get();
+        return Casa::with(['pessoa', 'photos'])->withCount('pessoa')->get();
     }
 
     public function getById(int $id): ?Casa
     {
-        return Casa::findOrFail($id)->with('pessoa')->first();
+        return Casa::findOrFail($id)->with(['pessoa', 'photos'])->first();
     }
 
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null)
     {
-        $result = Casa::with('pessoa','photos')
+        $result = Casa::with(['pessoa','photos'])
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('endereco', 'like', "%{$filter}%");
@@ -57,12 +57,7 @@ class CasaService {
 
     public function search(string $query): \Illuminate\Database\Eloquent\Collection
     {
-        return Casa::where('endereco', 'like', "%{$query}%")
-            ->orWhere('bairro', 'like', "%{$query}%")
-            ->orWhere('cidade', 'like', "%{$query}%")
-            ->orWhere('provincia', 'like', "%{$query}%")
-            ->with('pessoa')
-            ->get();
+        return Casa::where('endereco', 'like', "%{$query}%")->get();
     }
 
 }

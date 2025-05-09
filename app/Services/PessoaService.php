@@ -37,19 +37,19 @@ class PessoaService
 
     public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
-        return Pessoa::with(['casas', 'photos'])->get();
+        return Pessoa::with(['casas.photos', 'photos'])->get();
     }
 
     public function getById(int $id): ?Pessoa
     {
-        return Pessoa::with(['casas', 'photos'])
+        return Pessoa::with(['casas.photos', 'photos'])
             ->withCount('casas')
             ->findOrFail($id);
     }
 
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null)
     {
-        $result = Pessoa::with('casas', 'photos')
+        $result = Pessoa::with('casas.photos', 'photos')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('nome', 'like', "%{$filter}%");
