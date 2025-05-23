@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\CasaController;
@@ -9,12 +8,6 @@ use App\Http\Controllers\CasaPhotoController;
 use Inertia\Inertia;
 
 Route::get('/', [PessoaController::class, 'index'])->name('home');
-/* return Inertia::render('Welcome', [
-    'canLogin' => Route::has('login'),
-    'canRegister' => Route::has('register'),
-    'laravelVersion' => Application::VERSION,
-    'phpVersion' => PHP_VERSION,
-]); */
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -30,7 +23,6 @@ Route::resource('pessoas', PessoaController::class);
 Route::resource('casas', CasaController::class);
 Route::post('/casas/{casa}/photos', [CasaPhotoController::class, 'store'])->name('casas.photos.store');
 Route::delete('photos/{photo}', [CasaPhotoController::class, 'destroy'])->name('casas.photos.destroy');
-
 
 Route::get('casas/create/{pessoa}', [CasaController::class, 'create'])->name('casas.create.pessoa');
 require __DIR__.'/auth.php';

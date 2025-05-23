@@ -13,7 +13,6 @@ defineProps({
 });
 
 function handleFileChange(event, casaId) {
-    console.log('handleFileChange', event, casaId);
     const files = event.target.files;
 
     if (!files.length) return;
@@ -31,6 +30,10 @@ function handleFileChange(event, casaId) {
         },
     });
 }
+
+//console.log(route().params)
+//console.log(route().routes) // Verifica todas as rotas disponíveis
+
 
 </script>
 
