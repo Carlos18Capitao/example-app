@@ -31,6 +31,15 @@ class PessoaService
             $this->photoService->delete($photo);
         }
 
+        $pessoa->casas()->each(function ($casa) {
+            // Deletar todas as fotos associadas às casas
+            foreach ($casa->photos as $photo) {
+                $this->photoService->delete($photo);
+            }
+            // Deletar a casa
+            $casa->delete();
+        });
+
         $pessoa->delete();
         return;
     }

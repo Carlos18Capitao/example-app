@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\CasaController;
 use App\Http\Controllers\CasaPhotoController;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 Route::get('/', [PessoaController::class, 'index'])->name('home');
 
@@ -24,5 +26,7 @@ Route::resource('casas', CasaController::class);
 Route::post('/casas/{casa}/photos', [CasaPhotoController::class, 'store'])->name('casas.photos.store');
 Route::delete('photos/{photo}', [CasaPhotoController::class, 'destroy'])->name('casas.photos.destroy');
 
+Route::get('relatorio', [PdfController::class, 'index'])->name('relatorio');
+
 Route::get('casas/create/{pessoa}', [CasaController::class, 'create'])->name('casas.create.pessoa');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
