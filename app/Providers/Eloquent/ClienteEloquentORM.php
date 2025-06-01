@@ -28,7 +28,7 @@ class ClienteEloquentORM implements PersistInterface
      */
     public function read(int $id): ?Cliente
     {
-        return Cliente::findOrFail($id);
+        return Cliente::with('encomendas')->findOrFail($id);
     }
 
     /**
@@ -37,7 +37,7 @@ class ClienteEloquentORM implements PersistInterface
      * @return \Illuminate\Database\Eloquent\Collection|Cliente[]
      */
     public function readAll(): array {
-        return Cliente::all()->toArray();
+        return Cliente::with('encomendas')->all()->toArray();
     }
 
     /**
@@ -52,7 +52,7 @@ class ClienteEloquentORM implements PersistInterface
         $cliente = $this->read($data['id'] ?? $id);
         if ($cliente) {
             $cliente->update($data);
-            return $cliente;
+            return $cliente->with('encomendas')->first();
         }
         return null;
     }
