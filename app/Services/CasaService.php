@@ -8,9 +8,11 @@ use App\Services\PaginationPresenter;
 
 class CasaService {
 
+    protected PhotoService $photoService;
     public function __construct(
-        protected PhotoService $photoService
-    ) {}
+    ) {
+        $this->photoService = new PhotoService();
+    }
 
     public function create(array $data): Casa
     {

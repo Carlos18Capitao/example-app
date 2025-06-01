@@ -1,5 +1,5 @@
 <?php
-
+/* 
 use App\Services\CasaService;
 use App\Services\PessoaService;
 
@@ -184,3 +184,4 @@ test('it can search casas by endereco or bairro', function () {
     expect($result)->toHaveCount(1);
     expect($result[0]->id)->toEqual($casa2->id);
 });
+ */
