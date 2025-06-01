@@ -14,4 +14,11 @@ class Cliente extends Model
         'email',
         'telefone',
     ];
+    /**
+     * Get the orders associated with the client.
+     */
+    public function encomendas()
+    {
+        return $this->morphMany(Encomenda::class, 'encomendaable');
+    }
 }
