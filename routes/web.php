@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\CasaController;
 use App\Http\Controllers\CasaPhotoController;
+use App\Http\Controllers\ClienteController;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-Route::get('/', [PessoaController::class, 'index'])->name('home');
+Route::get('/', [ClienteController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('clientes', ClienteController::class);
 Route::resource('pessoas', PessoaController::class);
 Route::resource('casas', CasaController::class);
 Route::post('/casas/{casa}/photos', [CasaPhotoController::class, 'store'])->name('casas.photos.store');

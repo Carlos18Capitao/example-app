@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
+use Inertia\Inertia;
 
 class ClienteController extends Controller
 {
@@ -13,7 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return Inertia('Clients/index', compact('clientes'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia('clients.create');
     }
 
     /**
@@ -29,7 +31,8 @@ class ClienteController extends Controller
      */
     public function store(StoreClienteRequest $request)
     {
-        //
+        $cliente = Cliente::create($request->validated());
+        return redirect()->route('clients.index')->with('success', 'Cliente criado com sucesso!');
     }
 
     /**
@@ -37,7 +40,10 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return Inertia('clients.show', [
+            'cliente' => $cliente,
+            'encomendas' => $cliente->encomendas()->with('encomendaable')->get(),
+        ]);
     }
 
     /**
@@ -45,7 +51,9 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return Inertia('clients.edit', [
+            'cliente' => $cliente,
+        ]);
     }
 
     /**
@@ -53,7 +61,8 @@ class ClienteController extends Controller
      */
     public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        //
+        $cliente->update($request->validated());
+        return redirect()->route('clients.index')->with('success', 'Cliente atualizado com sucesso!');
     }
 
     /**
@@ -61,6 +70,7 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return redirect()->route('clients.index')->with('success', 'Cliente excluído com sucesso!');
     }
 }

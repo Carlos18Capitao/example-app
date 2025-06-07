@@ -1,0 +1,211 @@
+<script setup>
+import AppLayout from '@/Layouts/AppLayout.vue';
+    defineProps({
+        clientes: {
+            type: Array,
+            required: true
+        }
+    });
+</script>
+
+<template>
+    <AppLayout>
+        <section class="section">
+            <div class="container">
+                <div class="justify-content-center row">
+                    <div class="col-lg-12">
+                        <div class="candidate-list-widgets mb-4">
+                            <form action="#" class="">
+                                <div class="g-2 row">
+                                    <div class="col-lg-3">
+                                        <div class="filler-job-form">
+                                            <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1"
+                                                placeholder="Job, Company name... " type="search"
+                                                class="form-control filler-job-input-box form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="filler-job-form">
+                                            <i class="uil uil-location-point"></i>
+                                            <select class="form-select selectForm__inner" data-trigger="true"
+                                                name="choices-single-location" id="choices-single-location"
+                                                aria-label="Default select example">
+                                                <option value="AF">Afghanistan</option>
+                                                <option value="AX">Åland Islands</option>
+                                                <option value="AL">Albania</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="filler-job-form">
+                                            <i class="uil uil-clipboard-notes"></i>
+                                            <select class="form-select selectForm__inner" data-trigger="true"
+                                                name="choices-single-categories" id="choices-single-categories"
+                                                aria-label="Default select example">
+                                                <option value="4">Accounting</option>
+                                                <option value="1">IT &amp; Software</option>
+                                                <option value="3">Marketing</option>
+                                                <option value="5">Banking</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div>
+                                            <a class="btn btn-primary" href="#"><i class="uil uil-filter"></i>
+                                                Filter</a><a class="btn btn-success ms-2" href="#"><i
+                                                    class="uil uil-cog"></i> Advance</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="align-items-center row">
+                            <div class="col-lg-8">
+                                <div class="mb-3 mb-lg-0">
+                                    <h6 class="fs-16 mb-0">Showing 1 – 8 of 11 results</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="candidate-list-widgets">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="selection-widget">
+                                                <select class="form-select" data-trigger="true"
+                                                    name="choices-single-filter-orderby"
+                                                    id="choices-single-filter-orderby"
+                                                    aria-label="Default select example">
+                                                    <option value="df">Default</option>
+                                                    <option value="ne">Newest</option>
+                                                    <option value="od">Oldest</option>
+                                                    <option value="rd">Random</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="selection-widget mt-2 mt-lg-0">
+                                                <select class="form-select" data-trigger="true"
+                                                    name="choices-candidate-page" id="choices-candidate-page"
+                                                    aria-label="Default select example">
+                                                    <option value="df">All</option>
+                                                    <option value="ne">8 per Page</option>
+                                                    <option value="ne">12 per Page</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="candidate-list">
+                            <div v-for="(client, index) in clientes" :key="index" class="candidate-list-box card mt-4">
+                                <div class="p-4 card-body">
+                                    <div class="align-items-center row">
+                                        <div class="col-auto">
+                                            <div class="candidate-list-images">
+                                                <a href="#"><img
+                                                        src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
+                                                        class="avatar-md img-thumbnail rounded-circle" /></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="candidate-list-content mt-3 mt-lg-0">
+                                                <h5 class="fs-19 mb-0">
+                                                    <a class="primary-link" href="#">{{ client.nome }}</a><span
+                                                        class="badge bg-success ms-1"><i
+                                                            class="mdi mdi-star align-middle"></i>4.8</span>
+                                                </h5>
+                                                <p class="text-muted mb-2">{{ client.telefone }}</p>
+                                                <ul class="list-inline mb-0 text-muted">
+                                                    <li class="list-inline-item"><i class="mdi mdi-map-marker"></i>
+                                                        {{ client.email }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="favorite-icon">
+                                        <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </AppLayout>
+</template>
+
+<style scoped>
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+
+.avatar-md {
+    height: 5rem;
+    width: 5rem;
+}
+
+.fs-19 {
+    font-size: 19px;
+}
+
+.primary-link {
+    color: #314047;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+a {
+    color: #02af74;
+    text-decoration: none;
+}
+
+.bookmark-post .favorite-icon a,
+.job-box.bookmark-post .favorite-icon a {
+    background-color: #da3746;
+    color: #fff;
+    border-color: danger;
+}
+
+.favorite-icon a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #eff0f2;
+    border-radius: 6px;
+    color: rgba(173, 181, 189, .55);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+
+.candidate-list-box .favorite-icon {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.bg-soft-secondary {
+    background-color: rgba(116, 120, 141, .15) !important;
+    color: #74788d !important;
+}
+
+.mt-1 {
+    margin-top: 0.25rem !important;
+}
+</style>

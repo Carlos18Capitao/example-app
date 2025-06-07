@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Encomenda extends Model
 {
@@ -18,8 +19,8 @@ class Encomenda extends Model
     /**
      * Get the parent encomendaable model (Cliente or another model).
      */
-    public function encomendaable()
+    public function encomendaable(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Cliente::class);
     }
 }

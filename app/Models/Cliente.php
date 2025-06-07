@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cliente extends Model
 {
@@ -17,8 +18,8 @@ class Cliente extends Model
     /**
      * Get the orders associated with the client.
      */
-    public function encomendas()
+    public function encomendas(): HasMany
     {
-        return $this->morphMany(Encomenda::class, 'encomendaable');
+        return $this->hasMany(Encomenda::class);
     }
 }
