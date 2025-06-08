@@ -1,11 +1,11 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-    defineProps({
-        clientes: {
-            type: Array,
-            required: true
-        }
-    });
+defineProps({
+    clientes: {
+        type: Array,
+        required: true
+    }
+});
 </script>
 
 <template>
@@ -117,7 +117,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                                 <h5 class="fs-19 mb-0">
                                                     <a class="primary-link" href="#">{{ client.nome }}</a><span
                                                         class="badge bg-success ms-1"><i
-                                                            class="mdi mdi-star align-middle"></i>{{ client.encomendas_count }}</span>
+                                                            class="mdi mdi-star align-middle"></i>{{
+                                                        client.encomendas_count }}</span>
                                                 </h5>
                                                 <p class="text-muted mb-2">{{ client.telefone }}</p>
                                                 <ul class="list-inline mb-0 text-muted">
@@ -127,10 +128,20 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                                 </ul>
                                             </div>
                                         </div>
-                                        
-                                    </div>
-                                    <div class="favorite-icon">
-                                        <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                                        <div class="col-lg-4">
+                                            <div class="candidate-list-info mt-3 mt-lg-0">
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item"><i
+                                                            class="mdi mdi-account-multiple"></i> {{
+                                                        client.encomendas_count }}
+                                                        Encomendas</li>
+                                                    <li class="list-inline-item">
+                                                        <i class="mdi mdi-account-multiple"></i> {{
+                                                        client.enderecos_count }}
+                                                        Endereços</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
