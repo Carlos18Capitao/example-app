@@ -19,4 +19,8 @@ class Calca extends Model
     {
         return $this->morphMany(Photo::class, 'imageable');
     }
+    public function item()
+    {
+        return $this->morphOne(Item::class, 'itemable');
+    }
 }

@@ -137,8 +137,8 @@ defineProps({
                                                         Encomendas</li>
                                                     <li class="list-inline-item">
                                                         <i class="mdi mdi-account-multiple"></i> {{
-                                                        client.enderecos_count }}
-                                                        Endereços</li>
+                                                        client.encomendas[0].items[0] }} 
+                                                        </li>
                                                 </ul>
                                             </div>
                                         </div>
