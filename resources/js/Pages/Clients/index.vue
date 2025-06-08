@@ -118,28 +118,24 @@ defineProps({
                                                     <a class="primary-link" href="#">{{ client.nome }}</a><span
                                                         class="badge bg-success ms-1"><i
                                                             class="mdi mdi-star align-middle"></i>{{
-                                                        client.encomendas_count }}</span>
+                                                                client.encomendas_count }}</span>
                                                 </h5>
                                                 <p class="text-muted mb-2">{{ client.telefone }}</p>
-                                                <ul class="list-inline mb-0 text-muted">
-                                                    <li class="list-inline-item"><i class="mdi mdi-map-marker"></i>
-                                                        {{ client.email }}
-                                                    </li>
-                                                </ul>
+                                                <p class="text-muted mb-2">{{ client.email }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <div class="candidate-list-info mt-3 mt-lg-0">
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item"><i
-                                                            class="mdi mdi-account-multiple"></i> {{
-                                                        client.encomendas_count }}
-                                                        Encomendas</li>
-                                                    <li class="list-inline-item">
-                                                        <i class="mdi mdi-account-multiple"></i> {{
-                                                        client.encomendas[0].items[0] }} 
-                                                        </li>
-                                                </ul>
+                                            <div v-for="encomenda in client.encomendas" :key="encomenda.id"
+                                                class="candidate-list-info mt-3 mt-lg-0">
+                                                <p v-for="item in encomenda.items" class="text-muted mb-1"
+                                                    :key="item.id">
+                                                    <i class="uil uil-box"></i> {{ item.quantidade }} {{
+                                                        item.tipo_simples }}
+                                                    <span v-if="item.itemable">
+                                                        Cor: {{ item.itemable.cor }}
+
+                                                    </span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

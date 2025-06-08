@@ -30,4 +30,13 @@ class Item extends Model
     {
         return $this->belongsTo(Encomenda::class);
     }
+
+    // Item.php
+    protected $appends = ['tipo_simples'];
+
+    public function getTipoSimplesAttribute()
+    {
+        return class_basename($this->itemable_type); // "Casaco" ou "Calca"
+    }
+
 }
