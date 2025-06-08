@@ -14,7 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::with('encomendas')->withCount('encomendas')->get();
         return Inertia('Clients/index', compact('clientes'));
     }
 

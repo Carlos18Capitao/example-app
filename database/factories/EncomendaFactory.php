@@ -17,7 +17,9 @@ class EncomendaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cliente_id' => \App\Models\Cliente::factory(),
+            'data' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'status' => $this->faker->randomElement(['pendente', 'em_processo', 'concluida', 'cancelada']),
         ];
     }
 }

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('encomendas', function (Blueprint $table) {
+        Schema::create('fatos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
-            $table->string('data'); // Polymorphic relation
-            $table->string('status')->default('pendente'); // Status of the order
+            $table->string('cor');
+            $table->string('quantidade');
+            $table->foreignId('casaco_id')->constrained('casacos')->onDelete('cascade'); // Foreign key to clientes table
+            $table->foreignId('calca_id')->constrained('calcas')->onDelete('cascade'); // Foreign key to calcas table
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('encomendas');
+        Schema::dropIfExists('fatos');
     }
 };

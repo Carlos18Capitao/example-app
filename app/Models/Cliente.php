@@ -22,4 +22,9 @@ class Cliente extends Model
     {
         return $this->hasMany(Encomenda::class);
     }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'imageable');
+    }
 }

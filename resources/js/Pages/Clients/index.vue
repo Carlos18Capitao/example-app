@@ -117,7 +117,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                                                 <h5 class="fs-19 mb-0">
                                                     <a class="primary-link" href="#">{{ client.nome }}</a><span
                                                         class="badge bg-success ms-1"><i
-                                                            class="mdi mdi-star align-middle"></i>4.8</span>
+                                                            class="mdi mdi-star align-middle"></i>{{ client.encomendas_count }}</span>
                                                 </h5>
                                                 <p class="text-muted mb-2">{{ client.telefone }}</p>
                                                 <ul class="list-inline mb-0 text-muted">

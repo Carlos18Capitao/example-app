@@ -4,24 +4,24 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Cliente;
+use App\Models\Fato;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
-class ClienteSeeder extends Seeder
+class FatoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        /* Cliente::factory(10)->create([
+        /* Fato::factory(10)->create([
             'pessoa_id' => \App\Models\Pessoa::factory(),
         ]); */
-        DB::table('clientes')->insert([
-            'nome' => 'João Silva',
-            'email' => Str::random(10) . '@example.com',
-            'telefone' => '1234567890',
+        DB::table('fatos')->insert([
+            'cor'=> 'Cinza',
+            'quantidade' => 2,
+            'casaco_id' => \App\Models\Casaco::factory()->create()->id,
+            'calca_id' => \App\Models\Calca::factory()->create()->id,
         ]);
     }
 }

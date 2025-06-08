@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cliente>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Casaco>
  */
-class ClienteFactory extends Factory
+class CasacoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,8 @@ class ClienteFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'telefone' => $this->faker->phoneNumber(),
+            'cor' => $this->faker->colorName(),
+            'quantidade' => $this->faker->numberBetween(1, 10), // Quantidade entre 1 e 10
         ];
     }
 }
