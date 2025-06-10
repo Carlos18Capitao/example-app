@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
+use App\Services\ClienteServices;
 use Inertia\Inertia;
+
 
 class ClienteController extends Controller
 {
+    PUBLIC function __construct(protected ClienteServices $clienteServices)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $clientes = Cliente::with('encomendas.items.itemable')->withCount('encomendas')->get();
+        $clientes = $this->clienteServices->listar();
         return Inertia('Clients/index', compact('clientes'));
     }
 

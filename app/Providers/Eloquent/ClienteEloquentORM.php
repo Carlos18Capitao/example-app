@@ -37,7 +37,7 @@ class ClienteEloquentORM implements PersistInterface
      * @return \Illuminate\Database\Eloquent\Collection|Cliente[]
      */
     public function readAll(): array {
-        return Cliente::with('encomendas')->all()->toArray();
+       return Cliente::with('encomendas.items.itemable')->withCount('encomendas')->get()->toArray();
     }
 
     /**
