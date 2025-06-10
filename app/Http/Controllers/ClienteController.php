@@ -28,7 +28,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return Inertia('clients.create');
+        return Inertia('Clients/create');
     }
 
     /**
@@ -36,8 +36,8 @@ class ClienteController extends Controller
      */
     public function store(StoreClienteRequest $request)
     {
-        $cliente = Cliente::create($request->validated());
-        return redirect()->route('clients.index')->with('success', 'Cliente criado com sucesso!');
+        Cliente::create($request->all());
+        return redirect()->route('clientes.index')->with('success', 'Cliente criado com sucesso!');
     }
 
     /**

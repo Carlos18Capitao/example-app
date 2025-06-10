@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+import { Link } from '@inertiajs/vue3';
 defineProps({
     clientes: {
         type: Array,
@@ -52,9 +53,10 @@ defineProps({
                                     </div>
                                     <div class="col-lg-3">
                                         <div>
-                                            <a class="btn btn-primary" href="#"><i class="uil uil-filter"></i>
-                                                Filter</a><a class="btn btn-success ms-2" href="#"><i
-                                                    class="uil uil-cog"></i> Advance</a>
+                                            <Link class="btn btn-primary" href="#"><i class="uil uil-filter"></i>
+                                            Filter</Link>
+                                            <Link class="btn btn-success ms-2" :href="route('clientes.create')"><i class="uil uil-cog"></i> Novo
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
