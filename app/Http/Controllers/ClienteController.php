@@ -6,20 +6,22 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
 use App\Services\ClienteServices;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 
 class ClienteController extends Controller
 {
-    PUBLIC function __construct(protected ClienteServices $clienteServices)
+    public function __construct(protected ClienteServices $clienteServices)
     {
     }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = $this->clienteServices->listar();
+        $search = $request->input('search');
+        $clientes = $this->clienteServices->listar($search ?? '');
         return Inertia('Clients/index', compact('clientes'));
     }
 

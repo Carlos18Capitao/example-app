@@ -1,12 +1,27 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage, router  } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
 defineProps({
     clientes: {
         type: Array,
         required: true
     }
 });
+
+const filters = ref({
+    search: usePage().props.filters?.search || '',
+})
+
+// Atualiza a lista automaticamente sempre que o campo de busca mudar
+watch(() => filters.value.search, (value) => {
+    // Verifica se o valor é vazio, se for, remove o parâmetro de busca
+    console.log('Buscando clientes com:', value);
+    router.get(route('clientes.index'), { search: value }, {
+        preserveState: true,
+        replace: true,
+    })
+})
 </script>
 
 <template>
@@ -20,8 +35,9 @@ defineProps({
                                 <div class="g-2 row">
                                     <div class="col-lg-3">
                                         <div class="filler-job-form">
-                                            <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1"
-                                                placeholder="Job, Company name... " type="search"
+                                            <i class="uil uil-briefcase-alt"></i>
+                                            <input id="exampleFormControlInput1"  v-model="filters.search"
+                                                placeholder="nome, Telefone, Email..." type="search"
                                                 class="form-control filler-job-input-box form-control" />
                                         </div>
                                     </div>

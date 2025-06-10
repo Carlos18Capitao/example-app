@@ -36,8 +36,12 @@ class ClienteEloquentORM implements PersistInterface
      *
      * @return \Illuminate\Database\Eloquent\Collection|Cliente[]
      */
-    public function readAll(): array {
-       return Cliente::with('encomendas.items.itemable')->withCount('encomendas')->get()->toArray();
+    public function readAll(string $search): array {
+       return Cliente::with('encomendas.items.itemable')->withCount('encomendas')->when($search, function ($query, $search) {
+        $query->where('nome', 'like', "%{$search}%")
+        ->orWhere('email', 'like', "%{$search}%")
+        ->orWhere('telefone', 'like', "%{$search}%");
+    })->get()->toArray();
     }
 
     /**

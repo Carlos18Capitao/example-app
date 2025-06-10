@@ -26,8 +26,8 @@ class ClienteServices
         return $cliente;
     }
 
-    public function listar(){
-        return $this->clienteEloquentORM->readAll();
+    public function listar(string $search = ''): array {
+        return $this->clienteEloquentORM->readAll( $search);
     }
 
     public function apagar(int $id): bool {
