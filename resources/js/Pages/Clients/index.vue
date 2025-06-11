@@ -16,7 +16,6 @@ const filters = ref({
 // Atualiza a lista automaticamente sempre que o campo de busca mudar
 watch(() => filters.value.search, (value) => {
     // Verifica se o valor é vazio, se for, remove o parâmetro de busca
-    console.log('Buscando clientes com:', value);
     router.get(route('clientes.index'), { search: value }, {
         preserveState: true,
         replace: true,

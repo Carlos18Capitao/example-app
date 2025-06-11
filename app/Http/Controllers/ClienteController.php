@@ -38,7 +38,7 @@ class ClienteController extends Controller
      */
     public function store(StoreClienteRequest $request)
     {
-        Cliente::create($request->all());
+        $this->clienteServices->novo($request->all());
         return redirect()->route('clientes.index')->with('success', 'Cliente criado com sucesso!');
     }
 
@@ -47,9 +47,9 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
+        $cliente = $this->clienteServices->ver($cliente->id);
         return Inertia('clients.show', [
             'cliente' => $cliente,
-            'encomendas' => $cliente->encomendas()->with('encomendaable')->get(),
         ]);
     }
 
@@ -68,7 +68,7 @@ class ClienteController extends Controller
      */
     public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        $cliente->update($request->validated());
+        $this->clienteServices->atualizar($cliente->id, $request->all());
         return redirect()->route('clients.index')->with('success', 'Cliente atualizado com sucesso!');
     }
 
@@ -77,7 +77,7 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        $cliente->delete();
+        $this->clienteServices->apagar($cliente->id);
         return redirect()->route('clients.index')->with('success', 'Cliente excluído com sucesso!');
     }
 }

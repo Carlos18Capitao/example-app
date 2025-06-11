@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace App\Providers\Eloquent;
 
 
 use App\Providers\Contracts\PersistInterface;
-
+use Illuminate\Support\Facades\Cache;
 use App\Models\Cliente;
 
 class ClienteEloquentORM implements PersistInterface
@@ -28,7 +28,7 @@ class ClienteEloquentORM implements PersistInterface
      */
     public function read(int $id): ?Cliente
     {
-        return Cliente::with('encomendas')->findOrFail($id);
+        return Cliente::with('encomendas.items.itemable')->findOrFail($id);
     }
 
     /**
@@ -36,12 +36,20 @@ class ClienteEloquentORM implements PersistInterface
      *
      * @return \Illuminate\Database\Eloquent\Collection|Cliente[]
      */
-    public function readAll(string $search): array {
-       return Cliente::with('encomendas.items.itemable')->withCount('encomendas')->when($search, function ($query, $search) {
-        $query->where('nome', 'like', "%{$search}%")
-        ->orWhere('email', 'like', "%{$search}%")
-        ->orWhere('telefone', 'like', "%{$search}%");
-    })->get()->toArray();
+    public function readAll(string $search): array
+    {
+
+        $cacheKey = 'clientes_busca_' . md5($search ?? 'todos');
+
+        return Cache::remember($cacheKey, now()->addMinutes(5), function () use ($search) {
+            return Cliente::with('encomendas.items.itemable')->withCount('encomendas')->when($search, function ($query, $search) {
+                $query->where('nome', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('telefone', 'like', "%{$search}%");
+            })->get()->toArray();
+        });
+
+
     }
 
     /**
